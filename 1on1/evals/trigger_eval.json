@@ -1,0 +1,82 @@
+[
+  {
+    "query": "let's do our weekly 1:1",
+    "should_trigger": true
+  },
+  {
+    "query": "time for our monthly check-in, been a while since we did one",
+    "should_trigger": true
+  },
+  {
+    "query": "I want to do a review session — both how I've been using claude code and how you've been doing on this project",
+    "should_trigger": true
+  },
+  {
+    "query": "lets do our 1on1 for this sprint, been meaning to for a while lol",
+    "should_trigger": true
+  },
+  {
+    "query": "can we do a session where you assess my claude code workflow and give me honest feedback?",
+    "should_trigger": true
+  },
+  {
+    "query": "I'd like to reflect on how we've been working together on dashboard-api this past month",
+    "should_trigger": true
+  },
+  {
+    "query": "time for our end-of-sprint review, want to cover how things went and where we can improve",
+    "should_trigger": true
+  },
+  {
+    "query": "can we do a 1:1? want to talk about my prompting habits and whether I'm using cc efficiently",
+    "should_trigger": true
+  },
+  {
+    "query": "let's do a performance review — I want your honest take on how you've been doing and any feedback you have for me",
+    "should_trigger": true
+  },
+  {
+    "query": "hey do a check-in interview with me, been 2 weeks since the last one and there's stuff to go over",
+    "should_trigger": true
+  },
+  {
+    "query": "can you review this PR? it's the db migration I was working on, want to make sure it's solid before we merge",
+    "should_trigger": false
+  },
+  {
+    "query": "give me feedback on how I structured this UserService class — I think it's getting too complex",
+    "should_trigger": false
+  },
+  {
+    "query": "let's do a code review of the last 3 commits on this branch",
+    "should_trigger": false
+  },
+  {
+    "query": "what should I improve about this API schema? the nested objects feel wrong",
+    "should_trigger": false
+  },
+  {
+    "query": "I want to improve my prompting, can you give me some quick tips for writing better claude code prompts?",
+    "should_trigger": false
+  },
+  {
+    "query": "can you review my git history for this repo and flag anything that looks concerning pattern-wise?",
+    "should_trigger": false
+  },
+  {
+    "query": "let's talk about what went wrong with the auth implementation — the session handling was a mess",
+    "should_trigger": false
+  },
+  {
+    "query": "do a quick retrospective on this feature branch before we merge to main, just want to sanity check",
+    "should_trigger": false
+  },
+  {
+    "query": "how do you think this project is going overall? any concerns about where things are heading?",
+    "should_trigger": false
+  },
+  {
+    "query": "can you check in on my open github issues and tell me what's actually blocking vs what can wait?",
+    "should_trigger": false
+  }
+]
