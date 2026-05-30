@@ -1,1 +1,1 @@
-@./1on1/SKILL.md
+@./skills/1on1/SKILL.md
