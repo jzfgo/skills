@@ -1,0 +1,11 @@
+{
+  "name": "1on1",
+  "description": "Run structured 1:1 professional check-ins between Claude Code and the user",
+  "author": {
+    "name": "Javier Zapata",
+    "email": "javierzapata82@gmail.com"
+  },
+  "homepage": "https://github.com/jzfgo/skills/tree/main/1on1",
+  "license": "MIT",
+  "keywords": ["productivity", "workflow", "review"]
+}
