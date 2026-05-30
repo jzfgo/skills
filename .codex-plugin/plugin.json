@@ -1,0 +1,15 @@
+{
+  "name": "javito-skills",
+  "version": "1.0.0",
+  "description": "Personal AI agent skills by Javier Zapata",
+  "author": {
+    "name": "Javier Zapata",
+    "email": "javierzapata82@gmail.com",
+    "url": "https://github.com/jzfgo"
+  },
+  "homepage": "https://github.com/jzfgo/skills",
+  "repository": "https://github.com/jzfgo/skills",
+  "license": "MIT",
+  "keywords": ["productivity", "workflow", "skills"],
+  "skills": "./"
+}
