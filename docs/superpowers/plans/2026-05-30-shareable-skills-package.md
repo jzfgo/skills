@@ -4,7 +4,7 @@
 
 **Goal:** Configure the `skills` repo as a self-hosted Claude Code marketplace where each skill is independently installable via `/plugin install <skill>@javito-skills`.
 
-**Architecture:** The repo root holds a `.claude-plugin/marketplace.json` that lists each skill as a separate plugin pointing to its subdirectory. Each skill subdirectory holds its own `.claude-plugin/plugin.json` with metadata. The repo is pushed to `github.com/jzfgo/skills` and registered as a marketplace via `/plugin add-marketplace`.
+**Architecture:** The repo root holds a `.claude-plugin/marketplace.json` that lists each skill as a separate plugin pointing to its subdirectory. Each skill subdirectory holds its own `.claude-plugin/plugin.json` with metadata. The repo is pushed to `github.com/jzfgo/agents` and registered as a marketplace via `/plugin add-marketplace`.
 
 **Tech Stack:** JSON (plugin manifests), Git, GitHub, Claude Code plugin system.
 
@@ -198,7 +198,7 @@ Write `/Users/javi/Projects/personal/skills/1on1/.claude-plugin/plugin.json` wit
     "name": "Javier Zapata",
     "email": "javierzapata82@gmail.com"
   },
-  "homepage": "https://github.com/jzfgo/skills/tree/main/1on1",
+  "homepage": "https://github.com/jzfgo/agents/tree/main/1on1",
   "license": "MIT",
   "keywords": ["productivity", "workflow", "review"]
 }
@@ -288,7 +288,7 @@ Go to https://github.com/new and create a repo named `skills` under `jzfgo`. You
 - [ ] **Step 4: Add remote and push**
 
 ```bash
-git remote add origin https://github.com/jzfgo/skills.git
+git remote add origin https://github.com/jzfgo/agents.git
 git push -u origin main
 ```
 
@@ -297,7 +297,7 @@ git push -u origin main
 In a Claude Code session:
 
 ```
-/plugin add-marketplace github/jzfgo/skills
+/plugin add-marketplace github/jzfgo/agents
 ```
 
 - [ ] **Step 6: Install and verify the 1on1 skill**

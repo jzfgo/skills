@@ -138,7 +138,7 @@ The `name` in `plugin.json` and in the `marketplace.json` entry must match the s
 
 ### OpenCode
 
-See `.opencode/INSTALL.md` for setup instructions. Add `"plugin": ["javito-skills@git+https://github.com/jzfgo/skills.git"]` to your `opencode.json`.
+See `.opencode/INSTALL.md` for setup instructions. Add `"plugin": ["javito-skills@git+https://github.com/jzfgo/agents.git"]` to your `opencode.json`.
 
 ### Pi / AgentSkills standard
 
@@ -214,8 +214,8 @@ Write `/Users/javi/Projects/personal/skills/.codex-plugin/plugin.json` with this
     "email": "javierzapata82@gmail.com",
     "url": "https://github.com/jzfgo"
   },
-  "homepage": "https://github.com/jzfgo/skills",
-  "repository": "https://github.com/jzfgo/skills",
+  "homepage": "https://github.com/jzfgo/agents",
+  "repository": "https://github.com/jzfgo/agents",
   "license": "MIT",
   "keywords": ["productivity", "workflow", "skills"],
   "skills": "./"
@@ -264,8 +264,8 @@ Write `/Users/javi/Projects/personal/skills/.cursor-plugin/plugin.json` with thi
     "name": "Javier Zapata",
     "email": "javierzapata82@gmail.com"
   },
-  "homepage": "https://github.com/jzfgo/skills",
-  "repository": "https://github.com/jzfgo/skills",
+  "homepage": "https://github.com/jzfgo/agents",
+  "repository": "https://github.com/jzfgo/agents",
   "license": "MIT",
   "keywords": ["productivity", "workflow", "skills"],
   "skills": "./"
@@ -362,7 +362,7 @@ Add `javito-skills` to the `plugin` array in your `opencode.json` (global or pro
 
 ```json
 {
-  "plugin": ["javito-skills@git+https://github.com/jzfgo/skills.git"]
+  "plugin": ["javito-skills@git+https://github.com/jzfgo/agents.git"]
 }
 ```
 
@@ -390,7 +390,7 @@ To pin a specific version:
 
 ```json
 {
-  "plugin": ["javito-skills@git+https://github.com/jzfgo/skills.git#<commit-sha>"]
+  "plugin": ["javito-skills@git+https://github.com/jzfgo/agents.git#<commit-sha>"]
 }
 ```
 ```

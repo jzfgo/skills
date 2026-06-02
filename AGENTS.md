@@ -99,7 +99,7 @@ The `name` in `plugin.json` and in the `marketplace.json` entry must match the s
 
 ### OpenCode
 
-See `.opencode/INSTALL.md` for setup instructions. Add `"plugin": ["javito-skills@git+https://github.com/jzfgo/skills.git"]` to your `opencode.json`.
+See `.opencode/INSTALL.md` for setup instructions. Add `"plugin": ["javito-skills@git+https://github.com/jzfgo/agents.git"]` to your `opencode.json`.
 
 ### Pi / AgentSkills standard
 

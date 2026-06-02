@@ -9,7 +9,7 @@ Configure the `skills` repo as a self-hosted Claude Code marketplace so each ski
 
 ## Architecture
 
-One GitHub repo (`github.com/jzfgo/skills`) acts as both the marketplace registry and the plugin host. The root `marketplace.json` lists each skill as a separate plugin pointing to its subdirectory. Each skill subdirectory contains its own `plugin.json` with metadata.
+One GitHub repo (`github.com/jzfgo/agents`) acts as both the marketplace registry and the plugin host. The root `marketplace.json` lists each skill as a separate plugin pointing to its subdirectory. Each skill subdirectory contains its own `plugin.json` with metadata.
 
 This mirrors how third-party publishers (e.g. Sentry, Chrome DevTools) are structured in the official catalog, so submission later requires only updating `source` from a relative path to a `git-subdir` reference — no restructuring.
 
@@ -47,7 +47,7 @@ This mirrors how third-party publishers (e.g. Sentry, Chrome DevTools) are struc
     "name": "Javier Zapata",
     "email": "javierzapata82@gmail.com"
   },
-  "homepage": "https://github.com/jzfgo/skills/tree/main/1on1",
+  "homepage": "https://github.com/jzfgo/agents/tree/main/1on1",
   "license": "MIT",
   "keywords": ["productivity", "workflow", "review"]
 }
@@ -67,10 +67,10 @@ Add a "Plugin manifest" section documenting the `.claude-plugin/` convention and
 
 ## Testing Workflow
 
-Once pushed to `github.com/jzfgo/skills`:
+Once pushed to `github.com/jzfgo/agents`:
 
 ```
-/plugin add-marketplace github/jzfgo/skills
+/plugin add-marketplace github/jzfgo/agents
 /plugin install 1on1@javito-skills
 ```
 
@@ -90,7 +90,7 @@ to:
 ```json
 "source": {
   "source": "git-subdir",
-  "url": "https://github.com/jzfgo/skills.git",
+  "url": "https://github.com/jzfgo/agents.git",
   "path": "1on1",
   "ref": "main",
   "sha": "<commit sha at time of submission>"

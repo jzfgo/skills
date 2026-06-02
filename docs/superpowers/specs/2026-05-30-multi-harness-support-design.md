@@ -45,8 +45,8 @@ Same structure as `.claude-plugin/plugin.json`. `"skills": "./"` tells Codex to 
     "email": "javierzapata82@gmail.com",
     "url": "https://github.com/jzfgo"
   },
-  "homepage": "https://github.com/jzfgo/skills",
-  "repository": "https://github.com/jzfgo/skills",
+  "homepage": "https://github.com/jzfgo/agents",
+  "repository": "https://github.com/jzfgo/agents",
   "license": "MIT",
   "keywords": ["productivity", "workflow", "skills"],
   "skills": "./"
@@ -67,8 +67,8 @@ Cursor format includes `displayName` and omits fields Cursor doesn't use. `"skil
     "name": "Javier Zapata",
     "email": "javierzapata82@gmail.com"
   },
-  "homepage": "https://github.com/jzfgo/skills",
-  "repository": "https://github.com/jzfgo/skills",
+  "homepage": "https://github.com/jzfgo/agents",
+  "repository": "https://github.com/jzfgo/agents",
   "license": "MIT",
   "keywords": ["productivity", "workflow", "skills"],
   "skills": "./"
@@ -114,7 +114,7 @@ Converted from a regular file to a git symlink pointing to `AGENTS.md`. Claude C
 
 ### `.opencode/INSTALL.md`
 
-Install instructions: add `"plugin": ["javito-skills@git+https://github.com/jzfgo/skills.git"]` to `opencode.json`.
+Install instructions: add `"plugin": ["javito-skills@git+https://github.com/jzfgo/agents.git"]` to `opencode.json`.
 
 ### `.opencode/plugins/javito-skills.js`
 

@@ -1,6 +1,6 @@
 # skills
 
-[![skills.sh](https://skills.sh/b/jzfgo/skills)](https://skills.sh/jzfgo/skills)
+[![skills.sh](https://skills.sh/b/jzfgo/agents)](https://skills.sh/jzfgo/agents)
 
 Personal AI agent skills by [Javier Zapata](https://github.com/jzfgo), conforming to the [AgentSkills open standard](https://agentskills.io). Works with any compatible agent harness.
 
@@ -16,8 +16,8 @@ Skills are auto-discovered by any [AgentSkills-compatible](https://agentskills.i
 
 | Harness | Install |
 |---------|---------|
-| **Claude Code** | `claude mcp add javito-skills@git+https://github.com/jzfgo/skills.git` |
-| **OpenCode** | Add `"plugin": ["javito-skills@git+https://github.com/jzfgo/skills.git"]` to `opencode.json` |
+| **Claude Code** | `claude mcp add javito-skills@git+https://github.com/jzfgo/agents.git` |
+| **OpenCode** | Add `"plugin": ["javito-skills@git+https://github.com/jzfgo/agents.git"]` to `opencode.json` |
 | **Gemini CLI** | Add `@./skills/<name>/SKILL.md` entries to `GEMINI.md` |
 | **Pi** | Auto-discovered via `.agents/skills/` symlinks |
 | **Codex** | Auto-discovered via `.codex-plugin/plugin.json` |

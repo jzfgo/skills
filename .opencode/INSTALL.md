@@ -10,7 +10,7 @@ Add `javito-skills` to the `plugin` array in your `opencode.json` (global or pro
 
 ```json
 {
-  "plugin": ["javito-skills@git+https://github.com/jzfgo/skills.git"]
+  "plugin": ["javito-skills@git+https://github.com/jzfgo/agents.git"]
 }
 ```
 
@@ -38,6 +38,6 @@ To pin a specific version:
 
 ```json
 {
-  "plugin": ["javito-skills@git+https://github.com/jzfgo/skills.git#<commit-sha>"]
+  "plugin": ["javito-skills@git+https://github.com/jzfgo/agents.git#<commit-sha>"]
 }
 ```
