@@ -1,7 +1,11 @@
 ---
 name: 1on1
 description: >-
-  Run structured 1:1 professional check-ins between Claude Code and the user. ALWAYS use this skill — do not attempt a 1:1 from memory — whenever the user asks for a 1:1, check-in, performance review, sprint retrospective, or any session to review how Claude Code and the user have been working together. Trigger phrases include "let's do our 1:1", "time for a check-in", "1on1", "let's do a performance review", "check-in interview", "assess my claude code workflow", "let's reflect on how we've been working together", "end of sprint review", "how have we been doing", "weekly review". Claude Code drives the entire session: prepares from git history and past reviews, asks questions one at a time, self-reflects honestly on its own performance, persists action items to CLAUDE.md, and delivers a structured written report. Use this skill for any periodic human-AI collaboration review — not for code reviews, PR feedback, or debugging specific technical issues.
+  Structured 1:1 professional check-in between the AI assistant and the user.
+  Invoke with /1on1. The AI prepares from git history and past reviews, conducts
+  a guided interview one question at a time, self-reflects honestly, persists
+  action items to the agent config file, and delivers a written report.
+disable-model-invocation: true
 ---
 
 # 1:1 Professional Review
@@ -19,7 +23,7 @@ Before saying anything to the user, gather context:
 git log --oneline -25
 git status
 ```
-- Read `CLAUDE.md` if present
+- Read the agent config file if present (`CLAUDE.md`, `GEMINI.md`, `AGENTS.md`, etc.)
 - Check for package files (`package.json`, `requirements.txt`, `go.mod`, `Cargo.toml`, `pyproject.toml`, etc.) to understand the stack and tooling
 - Scan for obvious signals of recent work: feature branches, open TODOs, recent large diffs
 
@@ -27,11 +31,11 @@ git status
 > "I don't see an active project here. I can run a general session instead — shall we proceed with that, or would you like to point me to a directory first?"
 
 **Read past reviews:**
-- Check `{project_root}/.claude/reviews/` for a project session, or `~/.claude/reviews/` for a general one
+- Check `{project_root}/{agent_dir}/reviews/` for a project session, or `~/{agent_dir}/reviews/` for a general one (`{agent_dir}` is `.claude`, `.gemini`, etc. depending on your agent)
 - Read the last 3–5 reviews (sorted by date, most recent first)
 - As you read them, note:
   - **Recurring themes:** issues or recommendations that keep appearing across reviews
-  - **Past commitments:** things Claude Code or the user committed to — did they follow through?
+  - **Past commitments:** things the AI or the user committed to — did they follow through?
   - **Trends:** is anything getting better, worse, or stuck?
   - **Open action items:** anything from previous reports that was never resolved
 - Use this context to inform your questions and self-reflection. Reference past reviews naturally in the interview — e.g., "Last time we flagged X, how did that go?" or "This is the third review where Y has come up — let's dig into that."
@@ -46,10 +50,10 @@ Based on git history and project state, honestly reflect on:
 - Whether you've been using the right tools, leveraging skills, or defaulting to brute-force approaches
 
 **Prepare your questions for the user:**
-Based on the stack, CLAUDE.md, and git context, identify specific areas to probe:
+Based on the stack, agent config file, and git context, identify specific areas to probe:
 - Prompt and context patterns that might be improvable
 - Workflow areas where the user's stack has modern alternatives they may not know about
-- Underutilized Claude Code features relevant to what they're building
+- Underutilized AI features relevant to what they're building
 - Friction points you can infer from the project
 
 ---
@@ -69,7 +73,7 @@ Example (not a script):
 
 **Cover these areas across the conversation** (weave them in naturally, don't treat this as a checklist to run through in order):
 
-### Your Side — Claude Code Self-Reflection
+### Your Side — AI Self-Reflection
 Don't wait to be asked. Volunteer these reflections as part of the conversation flow:
 
 - **Completion quality:** Were tasks finished cleanly, or did things get rough toward the end? Were there dropped threads?
@@ -83,8 +87,8 @@ Don't wait to be asked. Volunteer these reflections as part of the conversation 
 Ask open, specific questions. Reference the actual project where you can:
 
 - **Prompt engineering:** Were prompts typically clear and specific, or did you find yourself asking for context that should have been provided upfront? What patterns did you notice?
-- **Context engineering:** Is `CLAUDE.md` present and being used well? Is context being provided efficiently, or is there redundancy across sessions?
-- **Claude Code feature leverage:** Are skills, MCP tools, IDE integrations, multi-file context, and other capabilities being used? What's going untapped?
+- **Context engineering:** Is the agent config file present and being used well? Is context being provided efficiently, or is there redundancy across sessions?
+- **AI feature leverage:** Are skills, MCP tools, IDE integrations, multi-file context, and other capabilities being used? What's going untapped?
 - **Workflow modernization:** Based on the stack, are there patterns or workflows that have better modern alternatives now adopted in the industry? Name them concretely.
 - **Tooling:** Are there CLI tools, libraries, platforms, or frameworks the user might be underutilizing or unaware of, given what you see in their stack?
 
@@ -94,7 +98,7 @@ Ask open, specific questions. Reference the actual project where you can:
 
 ## Step 4: Detect the Wrap-Up Signal
 
-When the user signals they're done — phrases like "wrap up", "that's it", "let's close", "done for today", "that's all", "generate the report", "let's wrap" — acknowledge it and move to the report:
+When the user signals they're done — wrapping up, closing out, or asking for the report — acknowledge it and move on:
 
 > "Got it — let me put this together."
 
@@ -108,7 +112,7 @@ When the user signals they're done — phrases like "wrap up", "that's it", "let
 ## Overview
 [2–3 sentences: what was covered, overall tone, one key theme]
 
-## Claude Code: Self-Assessment
+## AI: Self-Assessment
 
 **Wins**
 - [Specific, concrete]
@@ -131,7 +135,7 @@ When the user signals they're done — phrases like "wrap up", "that's it", "let
 
 | Owner | Item | Priority |
 |-------|------|----------|
-| Claude Code | [concrete action] | High / Med / Low |
+| AI | [concrete action] | High / Med / Low |
 | You | [concrete action] | High / Med / Low |
 
 ## Next Review
@@ -139,8 +143,8 @@ Suggested: [date — weekly by default unless a different cadence came up in con
 ```
 
 **Save the report to a file** after displaying it in the conversation:
-- Project session: `{project_root}/.claude/reviews/YYYY-MM-DD.md`
-- General session: `~/.claude/reviews/YYYY-MM-DD.md`
+- Project session: `{project_root}/{agent_dir}/reviews/YYYY-MM-DD.md`
+- General session: `~/{agent_dir}/reviews/YYYY-MM-DD.md`
 
 Create the directory if it doesn't exist. Tell the user where it was saved.
 
@@ -148,18 +152,18 @@ Create the directory if it doesn't exist. Tell the user where it was saved.
 
 ---
 
-## Step 6: Persist Action Items to CLAUDE.md
+## Step 6: Persist Action Items to Agent Config
 
-Reports without follow-through are just documentation. After saving the report, write the open action items into `CLAUDE.md` so they're loaded into context in every future session — for both of you.
+Reports without follow-through are just documentation. After saving the report, write the open action items into the agent config file so they're loaded into context in every future session — for both of you.
 
-Find or create `CLAUDE.md` (project root for project sessions, `~/.claude/CLAUDE.md` for general). Append or update a section like this.
+Find or create the agent config file (project root for project sessions, home directory for general): `CLAUDE.md` for Claude Code, `GEMINI.md` for Gemini CLI, `AGENTS.md` otherwise. Append or update a section like this.
 
-Why CLAUDE.md and not a separate file: keeping action items here maximises visibility (Claude reads it every session) and creates a natural incentive to close items — open action items add clutter to a file the user wants to keep lean (~200 lines). The cleanup pressure is a feature, not a bug.
+Why the agent config file and not a separate file: keeping action items here maximises visibility (the AI reads it every session) and creates a natural incentive to close items — open action items add clutter to a file the user wants to keep lean (~200 lines). The cleanup pressure is a feature, not a bug.
 
 ```markdown
 ## Open Action Items (1:1 — YYYY-MM-DD)
 
-**Claude Code:**
+**AI:**
 - [ ] [commitment from report]
 
 **You:**
@@ -170,10 +174,10 @@ Why CLAUDE.md and not a separate file: keeping action items here maximises visib
 
 A few notes on this:
 - If the section already exists from a previous review, **replace it** — don't append a second copy. Only the current open items belong here; resolved ones move to the review archive.
-- The inline instruction to Claude Code (`> When you notice context...`) is intentional — it instructs future Claude sessions to act on these items when relevant context appears, without the user having to ask. For example: if "set up CLAUDE.md" is an open item and the user starts a session in a project without one, Claude Code should proactively mention it.
-- If CLAUDE.md doesn't exist yet, create a minimal one with just this section and note that the user should fill in the rest.
+- The inline instruction to the AI (`> When you notice context...`) is intentional — it instructs future sessions to act on these items when relevant context appears, without the user having to ask. For example: if "set up the agent config file" is an open item and the user starts a session in a project without one, the AI should proactively mention it.
+- If the config file doesn't exist yet, create a minimal one with just this section and note that the user should fill in the rest.
 
-Tell the user the action items have been written to CLAUDE.md and will be surfaced proactively when relevant.
+Tell the user the action items have been written to the agent config file and will be surfaced proactively when relevant.
 
 ---
 
@@ -181,9 +185,9 @@ Tell the user the action items have been written to CLAUDE.md and will be surfac
 
 After persisting the action items, offer to set a reminder for the next review:
 
-> "I've suggested [date] for our next review. Want me to `/schedule` a reminder so it doesn't get lost?"
+> "I've suggested [date] for our next review. Want me to set a reminder so it doesn't get lost?"
 
-If they say yes, use `/schedule` to set a reminder for that date. If they decline or don't respond, leave it at the suggestion in the report.
+If your agent supports a scheduling command (e.g., `/schedule` in Claude Code), use it. If they decline or don't respond, leave it at the suggestion in the report.
 
 ---
 

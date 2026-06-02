@@ -4,14 +4,14 @@
     {
       "id": 1,
       "prompt": "let's do our weekly 1:1",
-      "expected_output": "A structured interview is conducted one question at a time, git history is referenced in the opening, Claude Code self-reflects honestly, and a report is saved to {project}/.claude/reviews/YYYY-MM-DD.md",
+      "expected_output": "A structured interview is conducted one question at a time, git history is referenced in the opening, the AI self-reflects honestly, and a report is saved to {project}/{agent_dir}/reviews/YYYY-MM-DD.md",
       "files": [],
       "assertions": []
     },
     {
       "id": 2,
       "prompt": "let's do a general 1:1 session",
-      "expected_output": "Skill detects no git project, informs user, proceeds after confirmation, conducts a general professional development interview, saves report to ~/.claude/reviews/",
+      "expected_output": "Skill detects no git project, informs user, proceeds after confirmation, conducts a general professional development interview, saves report to ~/{agent_dir}/reviews/",
       "files": [],
       "assertions": []
     },
