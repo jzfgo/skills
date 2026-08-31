@@ -1,0 +1,63 @@
+{
+  "skill_name": "voice-extractor",
+  "notes": "Eval prompts deliberately SUPPLY the author's side of Pass 2 and Pass 3 inline. Those passes are interactive by design, so an eval that omits them leaves the two most novel parts of the skill untested. Every corpus is READ-ONLY in every run.",
+  "fixture": {
+    "token": "{FIXTURE}",
+    "purpose": "Eval 1 needs a deliberately contaminated corpus. It must NOT point at ~/Documents/My Obsidian Vault, which is not under version control.",
+    "build": "mkdir -p $FIXTURE/mixed-vault/{Clippings,Notes,Weekly}; copy ~8 files from the vault's _archive/Clippings (third-party articles, several carrying status: ai-generated), ~5 from Notes/ (mostly book quotes and link dumps), and ~3 MOCs from MOCs/ (agent-generated scaffolding). Substitute the resulting absolute path for {FIXTURE} before running.",
+    "expected_shape": "~16 files, ~6,800 words, of which only ~1,300 words are the author's own original prose, all in a single register (Spanish technical analysis)."
+  },
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I want to build a skill that writes like me. My knowledge base is at {FIXTURE}/mixed-vault — go read it and extract my voice from my notes. Treat that directory as read-only; do not modify, move or create anything inside it.",
+      "expected_output": "The skill refuses to extract rather than proceeding. It reports corpus triage by bucket with counts, identifies that the overwhelming majority is saved articles by other authors and that agent-generated notes are AI-assisted, concludes the native corpus is insufficient, and offers the self-interview fallback with concrete prompts. NOTE from iteration 1: the no-skill baseline ALSO refused, and refused well — this fixture is contaminated so heavily (only ~1,300 words of original prose out of ~6,800) that refusal is the obvious call and the bare 'does it refuse' assertion does not discriminate. The skill-specific behaviour to grade is the STRUCTURE of the refusal: named provenance buckets with per-bucket counts, and a concrete self-interview fallback. A harder fixture — a marginal corpus, around 9 or 10 genuinely native documents in two registers, where the correct answer is 'proceed but flag the weaknesses' — would discriminate better and should replace this one in a later iteration.",
+      "files": [],
+      "assertions": [
+        "Refuses to proceed to Pass 1 extraction on this corpus",
+        "Reports counts per provenance bucket rather than a single undifferentiated total",
+        "Identifies clippings/saved articles as not the author's own writing",
+        "Identifies AI-generated or agent-written notes as disqualifying",
+        "Offers the self-interview fallback with at least four concrete writing prompts",
+        "Does not modify, create, or delete any file inside the vault"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Build my voice skill from my blog. The posts are at ~/Projects/personal/javi.io/src/content/ — there's a blog-es and a blog-en directory. Anything dated 2026 was written with AI help so leave those out. Read-only: do not modify anything in that repo. Run the corpus qualification and Pass 1 analysis, then stop and show me what you found before going further.",
+      "expected_output": "Qualifies the corpus, detects that the English posts are translations of the Spanish originals (paired by translationKey) and excludes them from the corpus rather than treating them as independent evidence, excludes the 2026 posts as AI-assisted, surfaces the 2007-08 vs 2020 date gap and asks which era is the target, notes the single-content-type limitation, reserves a held-out set BEFORE analysing, and produces a Pass 1 draft with per-claim filename + quoted-span evidence and VOICE/PLATFORM/BORDERLINE classification.",
+      "files": [],
+      "assertions": [
+        "Excludes the English posts as translations rather than counting them as native corpus",
+        "Excludes the 2026 posts as AI-assisted",
+        "Surfaces the multi-year gap in the corpus rather than silently averaging across it",
+        "Notes that only one content type is present and that this weakens format modes",
+        "Reserves a held-out set and names which documents, before presenting analysis",
+        "Every voice claim cites a filename and a quoted span, with no bare frequency counts like '8 of 12'",
+        "Classifies patterns as VOICE, PLATFORM or BORDERLINE",
+        "Marks thinly-supported inferences with an INFERRED marker",
+        "Does not modify any file in the javi.io repo"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run the full voice extraction on ~/Projects/personal/javi.io/src/content/blog-es/, using only posts dated 2020 or earlier. Read-only on that repo. I don't want to sit through the interactive parts, so here is my side of both review rounds up front — apply them as if I'd said them in conversation.\n\nPASS 2 REVIEW OF YOUR DRAFT:\n- OVERSTATED: you'll probably say I always use long sentences. I don't — I mix in short ones for emphasis, especially at the end of a section.\n- WRONG: I'm not formal. If your draft says formal or professional, that's wrong. I write like I talk.\n- MISSING: I use 'vosotros' and address the reader directly. That's important and it's very much me.\n- NEEDS_NUANCE: the technical vocabulary depends on the audience — heavy on dev posts, almost none on the personal ones.\n\nPASS 3 CALIBRATION OF YOUR SAMPLES:\n- Sample 1: CLOSE. Line 2 TOO_FORMAL, line 4 LLM_ISM ('cabe destacar' — I would never write that).\n- Sample 2: OFF. NOT_ME throughout, the whole thing reads like a corporate blog.\n- Sample 3: GOOD.\n\nNow finish the extraction and emit the actual skill files.",
+      "expected_output": "Completes all three passes, incorporating the supplied review verbatim (drops the formality claim, adds vosotros/direct address, softens the sentence-length claim, makes technical vocabulary audience-conditional). Emits a skill directory containing SKILL.md, VOICE_PROFILE.md, GROUNDING.md and a regression/ directory. The emitted SKILL.md leads with ban lists, includes anti-performative rules, has wrong/right pairs rather than numeric style dials, and carries an eager description. The calibration markings are stored as re-runnable regression cases. NOTE: 'cabe destacar' does not occur anywhere in the qualifying corpus, so banning it is not evidence the skill did anything — the prompt hands that string to both conditions. The discriminating behaviour is corpus-filtering of the ban list: 'clave' occurs in 4 qualifying posts and 'vosotros'/'estaréis' in 1, so those should survive as recorded exceptions or thresholds rather than being suppressed.",
+      "files": [],
+      "assertions": [
+        "Emits SKILL.md, VOICE_PROFILE.md, GROUNDING.md and a regression/ directory",
+        "The Pass 2 corrections are visibly applied: no formality claim survives, vosotros/direct address is present, the sentence-length claim is qualified, technical vocabulary is audience-conditional",
+        "The emitted ban list records EXCEPTIONS with supporting quotes for ban-list terms the corpus shows the author actually using (e.g. 'clave' appears in 4 of the qualifying posts), rather than banning them wholesale",
+        "Rate-limitable terms are expressed as thresholds or counts rather than flat prohibitions",
+        "The emitted SKILL.md leads with ban lists before descriptive voice patterns",
+        "Contains anti-performative rules warning against manufacturing catchphrases or inflating occasional habits",
+        "Voice rules are expressed as wrong/right pairs, not numeric dials like formality: 0.7",
+        "Contains no unfilled {{placeholder}} tokens",
+        "The emitted description is written to trigger eagerly, unlike the extractor's own",
+        "The Pass 3 markings are stored as regression cases with prompt, verdict and labels",
+        "Held-out documents are used for a final validation comparison and the result is reported honestly",
+        "Does not modify any file in the javi.io repo"
+      ]
+    }
+  ]
+}

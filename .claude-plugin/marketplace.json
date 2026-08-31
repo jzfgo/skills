@@ -12,6 +12,12 @@
       "description": "Run structured 1:1 professional check-ins between Claude Code and the user",
       "source": "./skills/1on1",
       "category": "productivity"
+    },
+    {
+      "name": "voice-extractor",
+      "description": "Build a personalised writing-voice skill from a corpus of the author's own writing",
+      "source": "./skills/voice-extractor",
+      "category": "productivity"
     }
   ]
 }

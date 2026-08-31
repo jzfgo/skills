@@ -1,0 +1,40 @@
+# NOTICE
+
+Third-party material incorporated into this repository.
+
+## skills/voice-extractor
+
+The three-pass extraction structure (baseline / alignment / calibration), the
+eight analysis dimensions, the VOICE / PLATFORM / BORDERLINE classification, the
+Pass 2 review taxonomy (WRONG / OVERSTATED / MISSING / NEEDS_NUANCE), the Pass 3
+calibration taxonomy (GOOD / CLOSE / OFF plus line-level labels), and the mapping
+from calibration labels to skill sections are derived from
+`personal-voice-extraction-process.md` in:
+
+    https://github.com/sam-dumont/claude-skills
+
+    MIT License
+    Copyright (c) 2025 Sam Dumont
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+
+The following design elements are independent additions and are not derived from
+the above: corpus provenance qualification and the four-bucket triage, the
+held-out validation set, the re-runnable regression suite, the Spanish LLM-ism
+ban list, and the separation of the grounding map from the voice profile.

@@ -1,0 +1,11 @@
+{
+  "name": "voice-extractor",
+  "description": "Build a personalised writing-voice skill from a corpus of the author's own writing",
+  "author": {
+    "name": "Javier Zapata",
+    "email": "javierzapata82@gmail.com"
+  },
+  "homepage": "https://github.com/jzfgo/agents/tree/main/skills/voice-extractor",
+  "license": "MIT",
+  "keywords": ["writing", "voice", "style", "skill-generation", "spanish"]
+}
