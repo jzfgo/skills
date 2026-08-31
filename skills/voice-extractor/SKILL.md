@@ -192,6 +192,16 @@ A fondness for parenthetical asides would.
 Mark BORDERLINE items honestly. They are the most valuable input to Pass 2 —
 they're precisely the questions where the author knows something you can't see.
 
+**Excluded from the corpus is not the same as useless as evidence.** The medium
+test needs two media, and the documents you disqualified are usually the only
+other medium you have. A habit that shows up both in the corpus and in something
+you excluded — a translated piece, a work document, writing in an institutional
+voice — has just survived a change of medium, which is the test. Read the
+excluded pile for *this* purpose and no other: it settles BORDERLINE items, and
+it never contributes a pattern of its own. Do not let it back in through the side
+door — cite it as corroboration for a pattern the corpus already shows, never as
+the source of one.
+
 ### Evidence discipline
 
 Every claim needs a **filename (or corpus tag) plus a quoted span**. Not "seen in
@@ -203,6 +213,16 @@ Where you're inferring rather than observing — a plausible pattern with thin
 support — mark it inline as `<!-- INFERRED -->`. These markers stay in the draft
 through Pass 3 so they keep drawing scrutiny, and get stripped at finalisation.
 Inference isn't forbidden; unmarked inference is.
+
+**Verify the citation before you make it, including your own.** Re-read the span
+in the file and confirm it says what you are about to claim; a claim about a
+repository's history means re-running the command, not recalling what it said
+earlier in the session. This sounds redundant next to the rule above and it is
+not: the characteristic failure here is not a missing citation but a *confident
+and false* one — the right conclusion supported by evidence that does not exist,
+which is invisible to every check that only asks whether a citation is present.
+A negative claim ("no commit does X") is the most dangerous shape, because it is
+the one you cannot support by reading a single file.
 
 ### Reserve a held-out set
 
