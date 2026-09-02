@@ -33,8 +33,8 @@ template to fill in.
 
 ## 1. Ban-list deltas
 
-The generic lists live in the skill's `assets/`. This section is only what the
-corpus changed about them.
+The skill loads the generic lists from its own `assets/` — this file cannot reach
+them by path and must not try. This section is only what the corpus changed.
 
 ### Also never, for this author
 {{banned words and turns verified absent from the corpus, or present only in
