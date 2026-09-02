@@ -1,6 +1,6 @@
 # LLM-isms in English
 
-Pair with `assets/shared/structural-tells.md` for the language-independent
+Pair with `../shared/structural-tells.md` for the language-independent
 shapes. This file covers lexis and fixed phrasing only.
 
 **Provenance markers:**

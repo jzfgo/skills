@@ -1,7 +1,7 @@
 # LLM-ismos en español
 
 Lexis and phrasing that mark Spanish text as machine-generated. Pair this with
-`assets/shared/structural-tells.md`, which covers the language-independent
+`../shared/structural-tells.md`, which covers the language-independent
 shapes — the triad, the scene-setting opening, the summary-plus-uplift close —
 all of which are at least as common in Spanish as in English.
 
@@ -38,6 +38,8 @@ in generated Spanish.
   **[A]**
 - **conviene señalar / no está de más recordar** — **[B]**
 - **cabe preguntarse** — **[?]**, especially as a manufactured pivot
+- **es imperativo / resulta imprescindible** — **[A]**. Manufactures an urgency
+  the argument has not earned. Ordinary Spanish says `hay que` or `tenemos que`.
 - **hay que tener presente que** — **[B]**
 
 ## Adjetivos inflados
@@ -54,6 +56,11 @@ is density, and the habit of attaching one to every noun.
 - **innovador**, **revolucionario**, **disruptivo** — **[B]**
 - **integral**, **holístico** — **[?]**
 - **versátil**, **escalable** — **[B]** in technical writing
+- **Intensificadores en -mente**: `sumamente`, `enormemente`, `tremendamente`,
+  `increíblemente`, `notablemente` — **[A]** as a class. Spanish speakers reach
+  overwhelmingly for `muy` + adjective; a piece with several -mente intensifiers
+  and no `muy` is almost certainly generated. Count the author's `muy` and
+  `mucho` against these before deciding a threshold.
 
 ## Verbos y calcos del inglés
 
@@ -76,6 +83,9 @@ Where generated Spanish most visibly shows its English substrate.
   does.
 - **en última instancia** for *ultimately* — **[B]**
 - **construir** for *build* in abstract senses (`construir confianza`) — **[?]**
+- **maximizar** / **minimizar** outside genuinely technical contexts — **[B]**.
+  Calque of *maximize*; natural Spanish says `aprovechar al máximo`, `sacar el
+  máximo partido`, or simply names the improvement.
 
 ## Aperturas
 
@@ -122,6 +132,9 @@ Individually fine; the tell is one at the head of nearly every paragraph.
   two as one entry, will strip a construction the author actually uses. Check them
   separately against the corpus; they can land in opposite buckets for the same
   person.
+- **Adicionalmente** — **[A]** at the head of a paragraph. A calque of
+  *Additionally*, and rarer in unselfconscious Spanish than `además` — which is
+  itself worth counting.
 - **tanto… como…** — **[B]** when stacked
 - **ya sea… o…** — **[B]**
 - **a la hora de** — **[B]**; usually a wordy substitute for `al` + infinitive

@@ -138,7 +138,7 @@ Check the corpus itself for AI-generated tells, as a **contamination detector**,
 not as a style observation.
 
 If material flagged Native at intake is full of the patterns in
-`assets/shared/structural-tells.md` and the per-language ban lists, one of two
+`../assets/shared/structural-tells.md` and the per-language ban lists, one of two
 things is true: the intake triage missed something, or this author genuinely
 writes that way. Both matter, and they need opposite responses.
 

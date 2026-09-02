@@ -41,7 +41,7 @@
   },
   {
     "query": "rewrite this paragraph so it sounds less robotic and more human please",
-    "should_trigger": false
+    "should_trigger": true
   },
   {
     "query": "can you make this email to my landlord sound a bit more professional? it's a bit too blunt right now",
@@ -77,6 +77,50 @@
   },
   {
     "query": "what are the most common words that give away AI generated text? writing a talk about it and want a list",
+    "should_trigger": false
+  },
+  {
+    "query": "escríbeme el correo para avisar al cliente de que el despliegue se retrasa hasta el jueves",
+    "should_trigger": true
+  },
+  {
+    "query": "draft the internal note about yesterday's outage — goes out to the whole team under my name",
+    "should_trigger": true
+  },
+  {
+    "query": "pásame esto a limpio, que lo quiero publicar en el blog esta tarde",
+    "should_trigger": true
+  },
+  {
+    "query": "write the description for this issue, I've pasted the repro steps below",
+    "should_trigger": true
+  },
+  {
+    "query": "me he escrito este mensaje para el grupo pero no me convence, ¿lo revisas y me dices qué falla?",
+    "should_trigger": true
+  },
+  {
+    "query": "this reads like ChatGPT wrote it. it's my post, fix it",
+    "should_trigger": true
+  },
+  {
+    "query": "la voz que tenemos guardada sigue metiendo exclamaciones en textos de trabajo, quítalo",
+    "should_trigger": true
+  },
+  {
+    "query": "write the release notes for v2.3 from this changelog — they go out under the company account, not mine",
+    "should_trigger": false
+  },
+  {
+    "query": "can you write this in my co-founder's voice? she has a much better way of pitching this than I do",
+    "should_trigger": false
+  },
+  {
+    "query": "tighten this paragraph, it's 200 words and should be 80. doesn't matter whose voice, it's internal scratch",
+    "should_trigger": false
+  },
+  {
+    "query": "what's in my voice profile? just show me the file, I want to read what you've got on me",
     "should_trigger": false
   }
 ]

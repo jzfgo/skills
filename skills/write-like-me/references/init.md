@@ -1,36 +1,26 @@
----
-name: voice-extractor
-description: >-
-  Build a personalised writing-voice skill from a corpus of someone's own
-  writing. This is a compiler, not a writer: it qualifies a corpus, analyses it
-  across eight dimensions, interviews the author about what it found,
-  calibrates against real samples, and emits an installable voice skill plus a
-  re-runnable regression suite that detects drift after a model or corpus
-  change. Use it whenever someone wants an agent to write the way they actually
-  write — "write like me", "escribe como yo", "capture my tone of voice", "stop
-  making me sound like ChatGPT", "build a style guide from my blog posts" — and
-  also to update, re-calibrate, or debug a voice skill that already exists.
-  Spanish and English are both first-class targets. Not for editing one
-  document to read better, and not for imitating a voice that isn't the
-  requester's own.
-disable-model-invocation: true
----
+# `init` — build the voice profile
 
-# Voice Extractor
+This is the flow behind `init`. It runs once per author, is heavily interactive,
+and is discarded when the run ends. Its output is the **profile**: a small set of
+data files that every other mode of this skill reads afterwards, in sessions that
+remember nothing about this conversation.
 
-You are building **a skill for one specific person**. Think compiler: the corpus
-and the author's judgement are your inputs, and your output is a second,
-installable skill that a future agent will load in a session that remembers
-nothing about this conversation.
+Think compiler. The corpus and the author's judgement are your inputs; the
+profile is your object file. Two things get confused constantly, so hold them
+apart from the first minute:
 
-Two documents get confused constantly. Hold them apart from the first minute:
+- **This document** is the method. It is generic, it ships with the skill, and it
+  is the same for every author.
+- **The profile you write** is the product. It is specific to one person, it
+  lives outside the skill, and it has to stand alone.
 
-- **This document** is the extractor. It runs once per author, is heavily
-  interactive, and is discarded when the run ends.
-- **The voice skill you emit** is the product. It has to stand alone.
-
-Anything you learn here that doesn't survive into the emitted files is lost. That
+Anything you learn here that doesn't survive into the profile is lost. That
 single fact should govern every judgement call you make below.
+
+Write the profile to the location `SKILL.md` resolved: a project-local
+`.write-like-me/` if one exists, otherwise `~/.write-like-me/`. If neither
+exists, create `~/.write-like-me/` and say so — a profile written somewhere the
+other modes don't look is a profile nobody will ever load.
 
 ## Choose the surface first
 
@@ -155,12 +145,12 @@ Tell them not to polish. Writing-for-the-exercise is its own register and it
 isn't the one they'll be using the skill for. Naming that reflex is usually
 enough to defuse it.
 
-Full prompt set and rationale in `references/corpus-qualification.md`.
+Full prompt set and rationale in `corpus-qualification.md`.
 
 ## Pass 1 — Baseline analysis
 
 Read the qualified corpus and characterise it across eight dimensions. Details,
-including what to look for in each, are in `references/dimensions.md`; read that
+including what to look for in each, are in `dimensions.md`; read that
 file now if you have not.
 
 **A.** Sentence patterns · **B.** Opening patterns · **C.** Vocabulary
@@ -169,7 +159,7 @@ Formatting habits · **G.** Language-specific patterns · **H.** LLM-ism presenc
 
 Openings and closings get their own attention (B, and the closing half of D)
 because that's where generated text gives itself away most reliably, and so
-that's where the emitted skill needs its sharpest rules.
+that's where the profile needs its sharpest rules.
 
 ### Classify every pattern before you write it down
 
@@ -180,7 +170,7 @@ For each pattern, decide what it actually is:
 - **BORDERLINE** — you genuinely can't tell yet.
 
 This classification is the single highest-leverage step in the pass, because the
-confound it addresses is the one that quietly ruins voice skills. "Uses H2
+confound it addresses is the one that quietly ruins voice profiles. "Uses H2
 headings and short paragraphs" is not a personality; it's what blogging looks
 like. Encode enough of that and you produce a skill that writes competent blog
 posts in nobody's voice.
@@ -230,7 +220,7 @@ Before you analyse anything, set aside **20% of the qualified corpus, chosen at
 random, and do not read it.** Note which documents they are and leave them alone.
 
 Everything the prior art in this space does terminates in someone's subjective
-judgement, which means a voice skill can be enthusiastically approved and still
+judgement, which means a profile can be enthusiastically approved and still
 be wrong. The held-out set is what makes the result checkable: at the end you'll
 generate against prompts derived from those documents and compare with the real
 thing the author wrote. Deciding this after you've read everything is not an
@@ -241,8 +231,8 @@ the intake threshold, hold back two documents rather than a percentage, and tell
 the author the validation will be weak. Don't skip it. Two checkable cases beat
 none, and the alternative is an extraction with no external evidence at all.
 
-Output of Pass 1: a draft voice skill built against
-`assets/voice-skill-template.md`, plus your VOICE/PLATFORM/BORDERLINE table.
+Output of Pass 1: a draft `VOICE.md` built against
+`../assets/profile-template.md`, plus your VOICE/PLATFORM/BORDERLINE table.
 
 ## Pass 2 — Alignment
 
@@ -286,7 +276,7 @@ Each sample gets an overall verdict:
 them)
 
 And each problem line gets a label that names what went wrong. The labels matter
-because each one **maps to the section of the emitted skill that has to change** —
+because each one **maps to the section of `VOICE.md` that has to change** —
 this is what turns a reaction into an edit:
 
 | Label | Fix it in |
@@ -308,47 +298,55 @@ markings as permanent: **these markings are the regression suite.** Store each a
 prompt + the author's verdict + the labels, because that's the format you'll
 re-run against later.
 
-## Emit the artifacts
+## Emit the profile
 
-Four artifacts, into a directory called **`write-like-me`** — always that name,
-never `write-like-<author>`. It is installed for its own author, so the possessive
-adds nothing, the command is identical for everyone, and the author's name stays
-out of a directory listing. The name goes in the `description:` instead.
+You are not emitting a skill. The skill already exists — it is the one you are
+running inside, it is public, and it is identical for every author. What you emit
+is **data it reads**: four files in the profile directory you resolved at the top
+of this document.
 
-Give it **four modes** — `rewrite`, `edit`, `review`, `extract` — with the
-author's own words as aliases wherever they used any. Spell out for each mode
-which of these files to load; an applicator that loads everything to fix one
-sentence has spent its budget before it starts. Guard `review` explicitly: an
-agent asked to critique will offer a rewrite "to illustrate", and that takes the
-decision away from the author.
+The split that matters is **generic method versus author-specific evidence**, and
+it does not run between extraction and writing — it runs straight through the
+middle of the writing rules. A ban on `in conclusion` is generic and already
+ships in `../assets/`. A note that this author demonstrably uses `crucial` in
+clean pre-AI writing is evidence, and it belongs in the profile. When in doubt,
+apply the stranger test: if the line would be identical for another author, it
+is method and does not go here.
 
-**1. `SKILL.md`** — the applicator. Structure it in this order, which is by
-descending impact on the output:
+**1. `VOICE.md`** — the applicator's rules, and the file loaded on every write.
+Structure it in this order, which is by descending impact on the output:
 
-1. **Ban lists** — words by grammatical category, and phrase-patterns: scenic
-   openings, importance-flagging filler, rule-of-three triads.
+1. **Ban-list deltas.** Not the generic list — the skill loads that itself from
+   `../assets/`. What goes here is what the corpus changed about it: the
+   **exceptions**, each with the quotation that earns it, and any capped-not-
+   banned items with their counts. A generic list over-suppresses; this file is
+   what makes it corpus-checked.
 2. **Anti-performative rules** — don't manufacture a catchphrase from one
    observed use; don't inflate an occasional habit into a signature. This section
    exists because the failure it prevents is the one authors find most
    embarrassing.
 3. **Core voice patterns**, each with a golden sample the applying agent can hold
    its draft against before delivering. Concrete comparison beats abstract rules.
-4. **Format modes**, with one named as the default, and openings and closings
-   broken out as their own subsections.
-5. **Adaptation rules**, then a two-sweep review of the finished draft: one sweep
-   for LLM-isms, a second for performative writing. Two separate passes, because
-   they're different failure modes and a combined sweep catches neither well.
+4. **Registers**, with one named as the default, and openings and closings broken
+   out as their own subsections. Call them registers, not modes — `rewrite` and
+   `edit` are modes, and reusing the word for `formal`/`personal` guarantees a
+   confusion that costs a whole draft.
+5. **What the two review sweeps check for this author.** The skill owns the
+   two-sweep structure; this section says which of the sections above each sweep
+   walks.
 
 Write rules as prescriptions with wrong/right pairs. The pairs do more work than
 any description — a demonstrated contrast is something a model can hold its draft
 against, where an abstract quality is not.
 
-**Correct in one direction only.** Models fail toward clean, neutral, and tidy —
-never toward too idiosyncratic. So write the rules to penalise under-shooting and
-leave over-shooting alone: "if the sentence lengths are all similar, vary them"
-rather than "keep sentence-length variance near the author's". A two-sided rule
-invites the model to manufacture quirks the author doesn't have, which reads
-worse than plain prose because it reads like someone doing an impression.
+**Correct in one direction only, and find out which direction it is.** The usual
+failure is toward clean, neutral and tidy, so the default is to write rules that
+penalise under-shooting and leave over-shooting alone: "if the sentence lengths
+are all similar, vary them" rather than "keep sentence-length variance near the
+author's". But do not assume the direction — Pass 3 tells you. An author whose
+corrections all pull *away* from the literary needs the rule written the other
+way round, and writing it backwards makes every draft worse. Record the direction
+you found, in the author's own corrections, at the top of section 3.
 
 The same asymmetry governs the ban lists. Derive them partly from what is
 **absent** in the corpus — the constructions this author never reaches for are
@@ -360,22 +358,10 @@ Some patterns are simultaneously the author's signature and a generic AI tell.
 Don't ban those; flag **stacking**. One use is voice, three in a page is a tell.
 Say so in the rule, and give the count.
 
-Give it a **deliberately eager `description:`**. This skill you're reading is
-heavyweight and runs on request; the voice skill is the opposite — it should
-fire on anything the author writes for an audience, including when they haven't
-thought to ask. An under-triggering voice skill is inert.
-
-Modes do not change that. A command interface and an eager description are not
-alternatives: the modes serve the author who knows what they want, and the
-description serves the far more common case where they just started writing. If
-the author's other skills all disable model invocation, raise it rather than
-copying the pattern — the asymmetry runs the other way here. A false trigger on
-a voice skill costs a paragraph that sounds like them; a missed one costs a
-paragraph that sounds like nobody.
-
 **2. `VOICE_PROFILE.md`** — the patterns, evidence, and corpus notes, referenced
-by `SKILL.md` rather than inlined. Keeping the profile separate means the author
-can correct a pattern later by editing one file, without regenerating anything.
+by `VOICE.md` rather than inlined. Keeping the evidence separate means the author
+can correct a rule later by editing one short file, and means a review can cite
+the proof without the writing path paying for it.
 
 Hold every line in it to two standards, both of which exist to stop the profile
 degrading into horoscope prose:
@@ -390,6 +376,11 @@ degrading into horoscope prose:
   output — which is exactly why scalar style dials (`formality: 0.7`) fail: no
   model can tell whether its paragraph is 0.7 formal.
 
+Record what you got wrong during the extraction, and what the profile is still
+weak on. Both are load-bearing: the first stops the next run repeating your
+mistakes, and the second is the only honest answer when the author asks how far
+to trust a register nothing in the corpus covers.
+
 **3. `GROUNDING.md`** — what the applying agent may assert as fact about the
 author, and what it must verify first. Voice and biography get conflated
 disastrously easily: an agent successfully imitating someone's confident register
@@ -397,16 +388,18 @@ will invent a job history, a client, or an anecdote in that same confident
 register. Sounding like the author never licenses speaking for them. Give it
 rows: what's safe to state, what needs checking, what's off-limits.
 
+Dates deserve their own row. A relative reference in a post ("three years ago
+this November") chained to a `date:` field you have already flagged as unreliable
+produces a confident absolute year that is nobody's claim but yours.
+
 **4. `regression/`** — the Pass 3 cases as prompt + golden sample + rubric,
 alongside the held-out documents. Include a short README saying how to re-run
 them, because the point is that they get re-run after a model upgrade or a corpus
 refresh, and the person doing that may not be you.
 
-Language assets live in `assets/es/` and `assets/en/`. Copy in the ban lists for
-the languages the author actually writes in. A bilingual author gets one voice
-with shared rules plus per-language sections — not two skills, because it's one
-person.
-
+A bilingual author gets one profile with shared rules plus per-language sections
+— not two profiles, because it's one person. Name in `VOICE.md` which of the
+skill's language assets apply.
 ## Validate before you hand it over
 
 Generate against two or three prompts derived from the **held-out documents**,
@@ -418,52 +411,28 @@ Report honestly. If the held-out comparison is weak, say so even when Pass 3
 went well — that gap is real information, and it usually means the corpus was
 thinner than it looked.
 
-Set expectations while you're there: a voice skill makes text read like the
+Set expectations while you're there: a voice profile makes text read like the
 author, and it reduces but does not eliminate AI-detector signal. Anyone who
 tells you otherwise is selling something.
 
-## Updating a voice skill that already exists
+## When the profile already exists
 
-Most of the time you're called, the skill will already exist and something will
-have gone wrong with it. Don't re-run the whole extraction by reflex — a full
-rebuild throws away every correction the author has made since, and those
-corrections are the most expensive information in the artifact.
-
-Run the regression suite first (`references/regression-suite.md` explains how to
-read the results), then match the fix to what the suite tells you:
-
-**A specific complaint** — "it keeps using em-dashes", "it opens every reply with
-a question". Treat it as a Pass 3 marking: label it, follow the label to the
-section it maps to, edit that section, and add the case to the suite so the fix
-stays fixed. This is a five-minute job, not an extraction.
-
-**Drift after a model change** — the profile is still accurate but the rules are
-landing differently. Look for rules written as tendencies rather than as
-checkable instructions, and sharpen those. The corpus is not the problem.
-
-**"It doesn't sound like me any more"** with no specific complaint — usually the
-author has moved rather than the skill. Ask for three recent pieces and compare
-them against the profile. If they've genuinely drifted apart, extend the corpus
-with the new material and re-run Passes 2 and 3 — but keep the existing profile
-as the starting draft rather than beginning from nothing.
-
-**New corpus material** — fold it in, hold out a fresh slice of it before
-analysing, and re-run the suite. A held-out set that has already been read is not
-held out, so never reuse the old one to validate a profile it helped build.
-
-Full re-extraction is right in one case: the original corpus turned out to be
-contaminated. If material was translated, AI-assisted, or not the author's, then
-the patterns built on it are unsound and no amount of patching fixes that. Go
-back to intake and say plainly why you're starting over.
+Don't reach for a full extraction. `update.md` owns that path, and it is the
+right one almost every time: a specific complaint is a five-minute edit to one
+section of `VOICE.md`, not a rebuild. Come back here only when the corpus itself
+turned out to be contaminated, or when new material is large enough to need a
+fresh held-out draw and another round of Passes 2 and 3. In both cases keep the
+existing profile as the starting draft — the author's accumulated corrections are
+the most expensive information in it.
 
 ## Reference material
 
-- `references/dimensions.md` — the eight dimensions in detail
-- `references/corpus-qualification.md` — provenance triage, worked examples
-- `references/regression-suite.md` — building and re-running the suite
-- `assets/voice-skill-template.md` — skeleton for the emitted `SKILL.md`
-- `assets/es/llm-isms.md`, `assets/en/llm-isms.md` — ban lists
-- `assets/shared/structural-tells.md` — language-independent patterns
+- `dimensions.md` — the eight dimensions in detail
+- `corpus-qualification.md` — provenance triage, worked examples
+- `regression-suite.md` — building and re-running the suite
+- `../assets/profile-template.md` — skeleton for the emitted `VOICE.md`
+- `../assets/es/llm-isms.md`, `../assets/en/llm-isms.md` — ban lists
+- `../assets/shared/structural-tells.md` — language-independent patterns
 
 ## Attribution
 
