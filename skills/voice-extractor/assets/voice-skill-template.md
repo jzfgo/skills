@@ -12,18 +12,38 @@ before the pattern descriptions.
 
 ```markdown
 ---
-name: write-like-{{author}}
+name: write-like-me
 description: >-
-  Write in {{author}}'s voice. Use for anything they will publish or send under
-  their own name — {{formats}} — including when they haven't asked for it by
-  name. If the task is to draft, rewrite, tighten, or reply as {{author}}, this
-  applies. Not for {{exclusions}}.
+  Write, rewrite or review a text in {{author}}'s voice — {{one-line voice
+  summary}}. Use for anything they will publish or send under their own name —
+  {{formats}} — including when they haven't asked for it by name, and when they
+  say {{their own phrasings}}. Supports rewrite, edit, review and extract modes.
+  Not for {{exclusions}}.
 ---
 
-# Write like {{author}}
+# Write like me
 
 Read `VOICE_PROFILE.md` before drafting. Before asserting anything factual about
-{{author}}, check `GROUNDING.md`.
+the author, check `GROUNDING.md`.
+
+## Choose a mode
+
+An explicit mode word wins:
+
+```txt
+rewrite | {{their word}}      Rewrite an existing text in their voice.
+edit | {{their word}}         Touch the minimum; keep structure and order.
+review | {{their word}}       Say what does not sound like them. Do NOT edit.
+extract | recalibrate         Re-extract or recalibrate → hand off to `voice-extractor`.
+(no mode)                     Write from scratch in their voice.
+```
+
+Without an explicit mode, infer it. Ask only when review and rewrite are equally
+plausible — handing back a rewrite to someone who asked for a critique takes the
+decision away from them, and it is the most expensive of the four mistakes.
+
+Load only what the mode needs, and say so explicitly. An applying agent that
+loads everything for a two-line edit wastes the budget it needs for the edit.
 
 ## Before you write
 
@@ -124,7 +144,24 @@ check. Feel is what this list exists to override.
 
 ## Notes for the extractor
 
-**On `description:`** — make it eager. The extractor that produced it is
+**On the name** — it is always `write-like-me`, never `write-like-<author>`. The
+skill is installed for its own author, so the possessive is redundant, the command
+is the same in everyone's muscle memory, and the author's name stays out of a
+directory listing. Put the name in the `description:` and in `VOICE_PROFILE.md`,
+where it belongs.
+
+**On modes** — emit the four. `review` is the one authors reach for most and the
+one an agent is most likely to get wrong by "helpfully" rewriting instead. Make
+the prohibition explicit in the mode's own description, not only in a general
+rule, and use the author's own words as mode aliases where they gave you any.
+
+**On `description:`** — make it eager, **and this does not conflict with having
+modes**. A voice skill with a command interface still has to fire on its default
+when nobody typed a command; that is the whole point. Prior art for the shape:
+`clarity` carries four modes and an eager description together. If the author's
+other skills disable model invocation, say why this one should not — a false
+trigger here costs a paragraph in their voice, while a missed one costs a
+paragraph in nobody's. The extractor that produced it is
 invoked deliberately; this skill is worthless if it sits idle while the author
 writes in a generic voice. Name the formats and the near-miss cases explicitly.
 

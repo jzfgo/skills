@@ -310,8 +310,17 @@ re-run against later.
 
 ## Emit the artifacts
 
-Three files, into a new skill directory named for the author (`write-like-<name>`
-or their preference):
+Four artifacts, into a directory called **`write-like-me`** — always that name,
+never `write-like-<author>`. It is installed for its own author, so the possessive
+adds nothing, the command is identical for everyone, and the author's name stays
+out of a directory listing. The name goes in the `description:` instead.
+
+Give it **four modes** — `rewrite`, `edit`, `review`, `extract` — with the
+author's own words as aliases wherever they used any. Spell out for each mode
+which of these files to load; an applicator that loads everything to fix one
+sentence has spent its budget before it starts. Guard `review` explicitly: an
+agent asked to critique will offer a rewrite "to illustrate", and that takes the
+decision away from the author.
 
 **1. `SKILL.md`** — the applicator. Structure it in this order, which is by
 descending impact on the output:
@@ -355,6 +364,14 @@ Give it a **deliberately eager `description:`**. This skill you're reading is
 heavyweight and runs on request; the voice skill is the opposite — it should
 fire on anything the author writes for an audience, including when they haven't
 thought to ask. An under-triggering voice skill is inert.
+
+Modes do not change that. A command interface and an eager description are not
+alternatives: the modes serve the author who knows what they want, and the
+description serves the far more common case where they just started writing. If
+the author's other skills all disable model invocation, raise it rather than
+copying the pattern — the asymmetry runs the other way here. A false trigger on
+a voice skill costs a paragraph that sounds like them; a missed one costs a
+paragraph that sounds like nobody.
 
 **2. `VOICE_PROFILE.md`** — the patterns, evidence, and corpus notes, referenced
 by `SKILL.md` rather than inlined. Keeping the profile separate means the author
