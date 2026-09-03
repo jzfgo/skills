@@ -1,0 +1,17 @@
+{
+  "name": "write-like-me",
+  "description": "Write, rewrite, review and correct text in your own voice, from a profile extracted from your own writing",
+  "author": {
+    "name": "Javier Zapata",
+    "email": "javierzapata82@gmail.com"
+  },
+  "homepage": "https://github.com/jzfgo/agents/tree/main/skills/write-like-me",
+  "license": "MIT",
+  "keywords": [
+    "writing",
+    "voice",
+    "style",
+    "tone-of-voice",
+    "spanish"
+  ]
+}

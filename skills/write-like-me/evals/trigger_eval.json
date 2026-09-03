@@ -1,0 +1,126 @@
+[
+  {
+    "query": "ok so i've got about 40 blog posts on my site going back to 2008 and im tired of rewriting every email claude drafts because it reads like a press release. can you build me something reusable that captures how i actually write?",
+    "should_trigger": true
+  },
+  {
+    "query": "escribe como yo — quiero una skill que aprenda mi voz a partir de los posts de mi blog, tengo unos 15 en español",
+    "should_trigger": true
+  },
+  {
+    "query": "I keep pasting the same three paragraphs of style instructions into every conversation. Is there a way to teach you my writing style permanently so I don't have to?",
+    "should_trigger": true
+  },
+  {
+    "query": "my write-like-me skill was working fine until the model got updated last week, now the drafts sound off again. can we recalibrate it against my newer posts?",
+    "should_trigger": true
+  },
+  {
+    "query": "~/writing/newsletter/ has about 30 issues I wrote myself over the last two years. build me a style guide skill out of them",
+    "should_trigger": true
+  },
+  {
+    "query": "can you go through my linkedin posts and make a reusable thing so my future drafts sound like me instead of like chatgpt",
+    "should_trigger": true
+  },
+  {
+    "query": "I'm bilingual — I write in Spanish and English. I want one voice profile that handles both rather than maintaining two separate ones. Is that doable?",
+    "should_trigger": true
+  },
+  {
+    "query": "the voice skill we set up keeps sprinkling em dashes everywhere and opening with rhetorical questions. neither is me. do we need to redo the whole extraction or can we just patch it",
+    "should_trigger": true
+  },
+  {
+    "query": "I want to set up a ghostwriting workflow. First thing I need is something that encodes my tone, my typical openings, and the words I never use, so the drafting step has something to work from.",
+    "should_trigger": true
+  },
+  {
+    "query": "quiero crear un perfil de voz personal para que el agente escriba mis artículos con mi estilo, no con el estilo genérico de siempre",
+    "should_trigger": true
+  },
+  {
+    "query": "rewrite this paragraph so it sounds less robotic and more human please",
+    "should_trigger": true
+  },
+  {
+    "query": "can you make this email to my landlord sound a bit more professional? it's a bit too blunt right now",
+    "should_trigger": false
+  },
+  {
+    "query": "I need to write a tone of voice guide for my company's marketing team — brand personality, dos and donts, that kind of thing. we're a b2b fintech and everything we publish sounds different depending on who wrote it",
+    "should_trigger": false
+  },
+  {
+    "query": "is there a way to check whether this 2000 word essay my student submitted was written by AI? some of the phrasing feels off",
+    "should_trigger": false
+  },
+  {
+    "query": "for this short story I'm working on, I want the prose to imitate Hemingway — short declaratives, no adverbs, that clipped thing he does",
+    "should_trigger": false
+  },
+  {
+    "query": "create a skill that reviews my pull requests and flags anything touching the auth module",
+    "should_trigger": false
+  },
+  {
+    "query": "translate my spanish blog posts in src/content/blog-es into english but keep my tone, don't make them sound like a corporate translation",
+    "should_trigger": false
+  },
+  {
+    "query": "my CLAUDE.md has a whole section about writing style — short sentences, no bullet lists in prose — and you keep ignoring it. can you work out why it's not being applied?",
+    "should_trigger": false
+  },
+  {
+    "query": "summarize the main themes across my blog posts from 2020, I'm trying to work out what I actually care about writing",
+    "should_trigger": false
+  },
+  {
+    "query": "what are the most common words that give away AI generated text? writing a talk about it and want a list",
+    "should_trigger": false
+  },
+  {
+    "query": "escríbeme el correo para avisar al cliente de que el despliegue se retrasa hasta el jueves",
+    "should_trigger": true
+  },
+  {
+    "query": "draft the internal note about yesterday's outage — goes out to the whole team under my name",
+    "should_trigger": true
+  },
+  {
+    "query": "pásame esto a limpio, que lo quiero publicar en el blog esta tarde",
+    "should_trigger": true
+  },
+  {
+    "query": "write the description for this issue, I've pasted the repro steps below",
+    "should_trigger": true
+  },
+  {
+    "query": "me he escrito este mensaje para el grupo pero no me convence, ¿lo revisas y me dices qué falla?",
+    "should_trigger": true
+  },
+  {
+    "query": "this reads like ChatGPT wrote it. it's my post, fix it",
+    "should_trigger": true
+  },
+  {
+    "query": "la voz que tenemos guardada sigue metiendo exclamaciones en textos de trabajo, quítalo",
+    "should_trigger": true
+  },
+  {
+    "query": "write the release notes for v2.3 from this changelog — they go out under the company account, not mine",
+    "should_trigger": false
+  },
+  {
+    "query": "can you write this in my co-founder's voice? she has a much better way of pitching this than I do",
+    "should_trigger": false
+  },
+  {
+    "query": "tighten this paragraph, it's 200 words and should be 80. doesn't matter whose voice, it's internal scratch",
+    "should_trigger": false
+  },
+  {
+    "query": "what's in my voice profile? just show me the file, I want to read what you've got on me",
+    "should_trigger": false
+  }
+]

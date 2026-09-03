@@ -12,6 +12,12 @@
       "description": "Run structured 1:1 professional check-ins between Claude Code and the user",
       "source": "./skills/1on1",
       "category": "productivity"
+    },
+    {
+      "name": "write-like-me",
+      "description": "Write, rewrite, review and correct text in your own voice, from a profile extracted from your own writing",
+      "source": "./skills/write-like-me",
+      "category": "productivity"
     }
   ]
 }
